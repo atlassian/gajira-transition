@@ -2,17 +2,17 @@
 Transition Jira issue
 
 ## Usage:
-![Issue Transition](../../../assets/transition/example.gif?raw=true)
+![Issue Transition](../../../assets/example.gif?raw=true)
 
 Example transition action:
 
     action "Jira Transition" {
-        uses = "atlassian/gajira/actions/transition@master"
+        uses = "atlassian/gajira-transition@master"
         needs = ["Jira Login"]
         args = "deployed to production --issue=GA-181"
     }
 
-You can omit `--issue` parameter if preceding action is [`Create`](../create) or [`Find Issue Key`](../find-issue-key) and just specify a transition name in action args. Here is full example workflow:
+You can omit `--issue` parameter if preceding action is [`Create`](https://github.com/atlassian/gajira-create) or [`Find Issue Key`](https://github.com/atlassian/gajira-find-issue-key) and just specify a transition name in action args. Here is full example workflow:
 
     workflow "Transition issue" {
         on = "push"
@@ -20,18 +20,18 @@ You can omit `--issue` parameter if preceding action is [`Create`](../create) or
     }
 
     action "Jira Login" {
-        uses = "atlassian/gajira/actions/login@v1.0.0"
+        uses = "atlassian/gajira-login@v1.0.0"
         secrets = ["JIRA_API_TOKEN", "JIRA_USER_EMAIL", "JIRA_BASE_URL"]
     }
 
     action "Jira Find Issue Key" {
-        uses = "atlassian/gajira/actions/find-issue-key@v1.0.0"
+        uses = "atlassian/gajira-find-issue-key@v1.0.0"
         needs = ["Jira Login"]
         args = "--from=branch"
     }
     
     action "Jira Transition" {
-        uses = "atlassian/gajira/actions/transition@v1.0.0"
+        uses = "atlassian/gajira-transition@v1.0.0"
         needs = ["Jira Find Issue Key"]
         args = "deployed to production"
     }
