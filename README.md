@@ -2,7 +2,7 @@
 Transition Jira issue
 
 ## Usage:
-![Issue Transition](../../../assets/example.gif?raw=true)
+![Issue Transition](../assets/example.gif?raw=true)
 
 Example transition action:
 
