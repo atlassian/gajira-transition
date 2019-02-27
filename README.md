@@ -1,6 +1,8 @@
 # Jira Transition
 Transition Jira issue
 
+Requires [Jira Login Action](https://github.com/marketplace/actions/jira-login)
+
 ## Usage:
 ![Issue Transition](../assets/example.gif?raw=true)
 
