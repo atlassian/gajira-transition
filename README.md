@@ -1,9 +1,12 @@
 # Jira Transition
 Transition Jira issue
 
-Requires [Jira Login Action](https://github.com/marketplace/actions/jira-login)
+For examples on how to use this, check out the [gajira-demo](https://github.com/atlassian/gajira-demo) repository
 
-## Usage:
+## Usage
+
+> ##### Note: this action requires [Jira Login Action](https://github.com/marketplace/actions/jira-login)
+
 ![Issue Transition](../assets/example.gif?raw=true)
 
 Example transition action:
