@@ -18,7 +18,7 @@ Example transition action:
         args = "deployed to production --issue=GA-181"
     }
 
-You can omit `--issue` parameter if preceding action is [`Create`](https://github.com/atlassian/gajira-create) or [`Find Issue Key`](https://github.com/atlassian/gajira-find-issue-key) and just specify a transition name in action args. Here is full example workflow:
+You can omit `--issue` parameter if preceding action is [`Create`](https://github.com/marketplace/actions/jira-create) or [`Find Issue Key`](https://github.com/marketplace/actions/jira-find) and just specify a transition name in action args. Here is full example workflow:
 
     workflow "Transition issue" {
         on = "push"
