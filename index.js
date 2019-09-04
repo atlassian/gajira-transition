@@ -1,6 +1,6 @@
 const fs = require('fs')
 const YAML = require('yaml')
-const yargs = require('yargs')
+const core = require('@actions/core')
 
 const cliConfigPath = `${process.env.HOME}/.jira.d/config.yml`
 const configPath = `${process.env.HOME}/jira/config.yml`
@@ -36,26 +36,17 @@ async function exec () {
 }
 
 function parseArgs () {
-  yargs
-    .option('issue', {
-      alias: 'i',
-      describe: 'Provide an issue key to perform a transition on',
-      demandOption: !config.issue,
-      default: config.issue,
-      type: 'string',
-    })
-    .option('id', {
-      describe: 'Provide a transition id to apply to an issue',
-      default: config.transtionId,
-      type: 'string',
-    })
-
-  yargs
-    .parserConfiguration({
-      'parse-numbers': false,
-    })
-
-  return yargs.argv
+  const transition = core.getInput('transition')
+  const transitionId = core.getInput('transitionId')
+  if (!transition && !transitionId) {
+    // Either transition _or_ transitionId _must_ be provided
+    throw new Exception("Error: please specify either a transition or transitionId")
+  }
+  return {
+    issue: core.getInput('issue'),
+    transition,
+    transitionId
+  }
 }
 
 exec()
