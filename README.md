@@ -35,9 +35,6 @@ jobs:
     name: Transition Issue
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-
     - name: Login
       uses: atlassian/gajira-login@master
       env:
