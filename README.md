@@ -12,46 +12,59 @@ For examples on how to use this, check out the [gajira-demo](https://github.com/
 
 Example transition action:
 
-    action "Jira Transition" {
-        uses = "atlassian/gajira-transition@master"
-        needs = ["Jira Login"]
-        args = "deployed to production --issue=GA-181"
-    }
+```yaml
+- name: Transition issue
+  id: transition
+  uses: atlassian/gajira-transition@master
+  with:
+    issue: GA-181
+    transition: "In progress"
+}
+```
 
-You can omit `--issue` parameter if preceding action is [`Create`](https://github.com/marketplace/actions/jira-create) or [`Find Issue Key`](https://github.com/marketplace/actions/jira-find) and just specify a transition name in action args. Here is full example workflow:
+The `issue` parameter can be an issue id created or retrieved by an upstream action – for example, [`Create`](https://github.com/marketplace/actions/jira-create) or [`Find Issue Key`](https://github.com/marketplace/actions/jira-find). Here is full example workflow:
 
-    workflow "Transition issue" {
-        on = "push"
-        resolves = ["Jira Login"]
-    }
+```yaml
+on:
+  push
 
-    action "Jira Login" {
-        uses = "atlassian/gajira-login@v1.0.0"
-        secrets = ["JIRA_API_TOKEN", "JIRA_USER_EMAIL", "JIRA_BASE_URL"]
-    }
+name: Test Transition Issue
 
-    action "Jira Find Issue Key" {
-        uses = "atlassian/gajira-find-issue-key@v1.0.0"
-        needs = ["Jira Login"]
-        args = "--from=branch"
-    }
-    
-    action "Jira Transition" {
-        uses = "atlassian/gajira-transition@v1.0.0"
-        needs = ["Jira Find Issue Key"]
-        args = "deployed to production"
-    }
+jobs:
+  test-transition-issue:
+    name: Transition Issue
+    runs-on: ubuntu-latest
+    steps:
+    - name: Login
+      uses: atlassian/gajira-login@master
+      env:
+        JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+        JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+        JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        
+    - name: Create new issue
+      id: create
+      uses: atlassian/gajira-create@master
 
+    - name: Transition issue
+      uses: atlassian/gajira-transition@master
+      with:
+        issue: ${{ steps.create.outputs.issue }}
+        transition: "In progress"
+```
 ----
 ## Action Spec:
 
 ### Environment variables
 - None
 
-### Arguments
-- `<transition name>` - Case insensetive name of transition to apply. Example: `Cancel` or `Accept`
-- `--issue=<KEY-NUMBER>` - issue key to perform a transition on
-- `--id=<transition id>` - transition id to apply to an issue
+### Inputs
+- `issue` (required) - issue key to perform a transition on
+- `transition` - Case insensetive name of transition to apply. Example: `Cancel` or `Accept`
+- `transitionId` - transition id to apply to an issue
+
+### Outputs
+- None
 
 ### Reads fields from config file at $HOME/jira/config.yml
 - `issue`

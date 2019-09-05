@@ -20,11 +20,9 @@ module.exports = class {
     const issueId = argv.issue
     const { transitions } = await this.Jira.getIssueTransitions(issueId)
 
-    const transitionName = argv._.join(' ')
-
     const transitionToApply = _.find(transitions, (t) => {
-      if (t.id === argv.id) return true
-      if (transitionName.toLowerCase() === t.name.toLowerCase()) return true
+      if (t.id === argv.transitionId) return true
+      if (t.name.toLowerCase() === argv.transition.toLowerCase()) return true
     })
 
     if (!transitionToApply) {

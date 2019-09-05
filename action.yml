@@ -1,0 +1,15 @@
+name: Jira Transition
+description: Change status of specific Jira issue
+inputs:
+  issue:
+    description: Key of the issue to be transitioned
+    required: true
+  transition:
+    description: The transition to apply to the issue, e.g. 'In Progress'
+    required: false
+  transitionId:
+    description: The id of a transition to apply to the issue
+    required: false
+runs:
+  using: 'node12'
+  main: './dist/index.js'
