@@ -1,5 +1,8 @@
 name: Jira Issue Transition
 description: Change status of specific Jira issue
+branding:
+  icon: 'chevron-right'
+  color: 'blue'
 inputs:
   issue:
     description: Key of the issue to be transitioned
