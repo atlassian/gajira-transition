@@ -1,4 +1,4 @@
-name: Jira Transition
+name: Jira Issue Transition
 description: Change status of specific Jira issue
 inputs:
   issue:
