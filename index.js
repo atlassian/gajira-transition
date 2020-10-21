@@ -2,7 +2,6 @@ const fs = require('fs')
 const YAML = require('yaml')
 const core = require('@actions/core')
 
-const cliConfigPath = `${process.env.HOME}/.jira.d/config.yml`
 const configPath = `${process.env.HOME}/jira/config.yml`
 const Action = require('./action')
 
@@ -19,12 +18,11 @@ async function exec () {
     }).execute()
 
     if (result) {
-      const yamledResult = YAML.stringify(result)
       const extendedConfig = Object.assign({}, config, result)
 
       fs.writeFileSync(configPath, YAML.stringify(extendedConfig))
 
-      return fs.appendFileSync(cliConfigPath, yamledResult)
+      return
     }
 
     console.log('Failed to transition issue.')
@@ -38,14 +36,16 @@ async function exec () {
 function parseArgs () {
   const transition = core.getInput('transition')
   const transitionId = core.getInput('transitionId')
+
   if (!transition && !transitionId) {
     // Either transition _or_ transitionId _must_ be provided
-    throw new Exception("Error: please specify either a transition or transitionId")
+    throw new Error('Error: please specify either a transition or transitionId')
   }
+
   return {
     issue: core.getInput('issue'),
     transition,
-    transitionId
+    transitionId,
   }
 }
 
