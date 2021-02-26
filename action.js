@@ -34,8 +34,13 @@ module.exports = class {
 
       return
     }
-
     console.log(`Selected transition:${JSON.stringify(transitionToApply, null, 4)}`)
+
+    if (transitionToApply.name === transitionToApply.to.name) {
+      console.log(`Issue already in in status ${argv.transition}`)
+
+      return {}
+    }
 
     await this.Jira.transitionIssue(issueId, {
       transition: {
