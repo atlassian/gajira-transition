@@ -1,5 +1,4 @@
-on:
-  push
+on: push
 
 name: Test Transition Issue
 
@@ -22,13 +21,10 @@ jobs:
       id: create
       uses: atlassian/gajira-create@master
       with:
-        project: GA
-        issuetype: Build
-        summary: |
-          Build completed for ${{ github.repository }}
-        description: |
-          Compare branch|${{ github.event.compare }} # https://developer.github.com/v3/activity/events/types/#webhook-payload-example-31
-
+        project: TRANS
+        issuetype: Task
+        summary: Build completed for ${{ github.repository }}
+        description: Compare branch|${{ github.event.compare }} # https://developer.github.com/v3/activity/events/types/#webhook-payload-example-31
 
     - name: Transition issue
       uses: ./
