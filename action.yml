@@ -14,5 +14,5 @@ inputs:
     description: The id of a transition to apply to the issue
     required: false
 runs:
-  using: 'node12'
+  using: 'node16'
   main: './dist/index.js'
