@@ -1,4 +1,5 @@
 # Jira Transition
+
 Transition Jira issue
 
 > ##### Only supports Jira Cloud. Does not support Jira Server (hosted)
@@ -14,7 +15,7 @@ Example transition action:
 ```yaml
 - name: Transition issue
   id: transition
-  uses: atlassian/gajira-transition@master
+  uses: atlassian/gajira-transition@v3
   with:
     issue: GA-181
     transition: "In progress"
@@ -35,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Login
-      uses: atlassian/gajira-login@master
+      uses: atlassian/gajira-login@v3
       env:
         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
@@ -43,10 +44,10 @@ jobs:
         
     - name: Create new issue
       id: create
-      uses: atlassian/gajira-create@master
+      uses: atlassian/gajira-create@v3
 
     - name: Transition issue
-      uses: atlassian/gajira-transition@master
+      uses: atlassian/gajira-transition@v3
       with:
         issue: ${{ steps.create.outputs.issue }}
         transition: "In progress"
