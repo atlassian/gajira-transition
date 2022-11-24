@@ -1,7 +1,7 @@
 {
   "name": "@atlassian/gajira-transition",
-  "version": "3.0.0",
-  "description": "",
+  "version": "3.0.1",
+  "description": "Transition issues through Github Actions",
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
