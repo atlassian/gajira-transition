@@ -41,7 +41,7 @@ jobs:
         JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
         JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
         JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-        
+
     - name: Create new issue
       id: create
       uses: atlassian/gajira-create@v3
@@ -51,6 +51,8 @@ jobs:
       with:
         issue: ${{ steps.create.outputs.issue }}
         transition: "In progress"
+        fields: |
+            { "resolution": "Done" }
 ```
 ----
 ## Action Spec:
@@ -62,6 +64,7 @@ jobs:
 - `issue` (required) - issue key to perform a transition on
 - `transition` - Case insensetive name of transition to apply. Example: `Cancel` or `Accept`
 - `transitionId` - transition id to apply to an issue
+- `fields` - JSON string containing a map of fields to update
 
 ### Outputs
 - None

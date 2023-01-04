@@ -37,6 +37,8 @@ function parseArgs () {
   const transition = core.getInput('transition')
   const transitionId = core.getInput('transitionId')
 
+  const fieldsObj = JSON.parse(core.getInput('fields') || "{}")
+
   if (!transition && !transitionId) {
     // Either transition _or_ transitionId _must_ be provided
     throw new Error('Error: please specify either a transition or transitionId')
@@ -46,6 +48,7 @@ function parseArgs () {
     issue: core.getInput('issue'),
     transition,
     transitionId,
+    fieldsObj
   }
 }
 

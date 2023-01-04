@@ -13,6 +13,9 @@ inputs:
   transitionId:
     description: The id of a transition to apply to the issue
     required: false
+  fields:
+    description: Map containing the field name and value to assign to each in JSON format
+    required: false
 runs:
   using: 'node16'
   main: './dist/index.js'
