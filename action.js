@@ -41,7 +41,7 @@ module.exports = class {
       transition: {
         id: transitionToApply.id,
       },
-      fields: argv.fields,
+      fields: argv.fieldsObj,
     })
 
     const transitionedIssue = await this.Jira.getIssue(issueId)
