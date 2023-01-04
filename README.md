@@ -52,7 +52,11 @@ jobs:
         issue: ${{ steps.create.outputs.issue }}
         transition: "In progress"
         fields: |
-            { "resolution": "Done" }
+            {
+              "assignee": {
+                "name": "Bob"
+              }
+            }
 ```
 ----
 ## Action Spec:
