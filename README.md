@@ -23,7 +23,6 @@ Example transition action:
   with:
     issue: GA-181
     transition: "In progress"
-}
 ```
 
 The `issue` parameter can be an issue id created or retrieved by an upstream action – for example, [`Create`](https://github.com/marketplace/actions/jira-create) or [`Find Issue Key`](https://github.com/marketplace/actions/jira-find). Here is full example workflow:
